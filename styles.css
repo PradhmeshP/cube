@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.board {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1000px;
+    height: 1000px;
+    margin: -500px 0 0 -500px;
+    border-radius: 50%;
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, .8) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .8) 75%, rgba(0, 0, 0, .8)),
+        linear-gradient(-45deg, rgba(0, 0, 0, .8) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .8) 75%, rgba(0, 0, 0, .8)),
+        radial-gradient(circle, rgb(0, 25, 253), transparent);
+    background-size: 100px 100px, 100px 100px, 100% 100%;
+    transform: perspective(1000px) translateZ(-250px) rotateX(70deg);
+    transform-style: preserve-3d;
+    animation: rotRound 30s linear infinite;
+}
+
+@keyframes rotRound {
+    from {
+        transform: perspective(1000px) translateZ(-250px) rotateX(70deg) rotate(0);
+    }
+
+    to {
+        transform: perspective(1000px) translateZ(-250px) rotateX(70deg) rotate(360deg);
+    }
+}
+
+.board:hover {
+    animation: rotUp 5s linear infinite;
+}
+
+@keyframes rotUp {
+    from {
+        transition: 3s;
+        transform: perspective(1000px) translateZ(-250px);
+    }
+
+    to {
+        transition: 3s;
+        transform: perspective(-2000px) translateZ(500px);
+    }
+}
+
+.cube {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 250px;
+    height: 250px;
+    margin: -125px 0 0 -125px;
+    transform-style: preserve-3d;
+    transform: translateZ(126px);
+}
+
+.wall {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 255, .2);
+    border: 10px solid rgba(0, 0, 255, .8);
+}
+
+.wall:nth-child(1) {
+    transform: translateZ(125px);
+    background-color: transparent;
+}
+
+.wall:nth-child(2) {
+    transform: rotateY(180deg) translateZ(125px);
+}
+
+.wall:nth-child(3) {
+    transform: rotateY(-90deg) translateX(-125px);
+    transform-origin: left;
+}
+
+.wall:nth-child(4) {
+    transform: rotateY(90deg) translateX(125px);
+    transform-origin: right;
+}
+
+
+.wall:nth-child(5) {
+    transform: rotateX(-90deg) translateZ(-125px);
+}
+
+
+.wall:nth-child(6) {
+    transform: rotateX(-90deg) translateZ(125px);
+}
